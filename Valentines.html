@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hey Baby, I have something to ask of you</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            background: url('https://images.rawpixel.com/image_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIzLTExL3Jhd3BpeGVsb2ZmaWNlMTBfZmFudGFzeV9ldmVuaW5nX3NreV9iYWNrZ3JvdW5kX3dpdGhfaGVhcnRfc2hhcF80NzI3OTdiOC0xMWUwLTRlOWMtOWRiNi1iYzNmMmE2YjBmM2RfMS5qcGc.jpg') center/cover fixed no-repeat;
+            color: white;
+            overflow: hidden; /* Hide scrollbars */
+            position: relative; /* Set position for absolute positioning of bear image */
+        }
+        h1, h2 {
+            font-size: 36px;
+            font-weight: bold;
+            font-family: 'Lucida Handwriting', cursive;
+            color: white;
+            text-shadow: 4px 4px 4px #800080; /* Purple shadow */
+            position: relative;
+            z-index: 1; /* Ensure header stays on top */
+            margin-top: 20px; /* Adjusted margin for better visibility */
+        }
+        .pleading-bear {
+            max-width: 250px; /* Adjust size as needed */
+            max-height: 250px;
+            border-radius: 10px; /* Add rounded corners */
+            margin: 20px auto; /* Center the bear image */
+            transition: opacity 0.5s ease-in-out; /* Fade in effect */
+        }
+        #goAheadButton {
+            padding: 10px;
+            margin: 5px;
+            font-size: 16px;
+            background-color: #ff69b4; /* Pink background */
+            color: white;
+            border: none;
+            border-radius: 15px; /* Rounder edges */
+            cursor: pointer;
+            transition: transform 0.2s ease-in-out; /* Smooth transition for vibration effect */
+        }
+        #valentineForm {
+            display: none;
+            flex-direction: column; /* Adjusted to display options top to bottom */
+            align-items: center;
+            justify-content: center;
+            height: 100vh; /* Full viewport height */
+            margin-top: 20px;
+            opacity: 0; /* Initially hidden */
+            transition: opacity 0.5s ease-in-out; /* Smooth transition for fade in effect */
+            z-index: 3; /* Ensure form stays on top */
+        }
+        button {
+            padding: 10px;
+            margin: 5px;
+            font-size: 16px;
+            border: none;
+            border-radius: 15px; /* Rounder edges */
+            cursor: pointer;
+            transition: transform 0.5s ease-in-out; /* Smooth transition for moving away effect */
+        }
+        #yesOption, #noOption {
+            color: white;
+            background-color: #ff69b4; /* Pink background */
+            text-shadow: 2px 2px 2px #800080; /* Purple shadow */
+        }
+        #noOption:hover {
+            transform: translateX(30px); /* Move away on hover */
+        }
+        #happyBearMedia {
+            display: none; /* Hide the happy bear image initially */
+            width: 80%; /* Increase image size */
+            max-height: 75vh; /* Limit the media size to 75% of the viewport height */
+            border: 10px solid #ff69b4; /* Pink glitter border */
+            border-radius: 10px; /* Add rounded corners */
+            position: absolute;
+            top: 50%; /* Center the image vertically */
+            left: 50%; /* Center the image horizontally */
+            transform: translate(-50%, -50%);
+            image-rendering: pixelated; /* Prevent blurring */
+            z-index: 3; /* Ensure media stays on top */
+        }
+    </style>
+</head>
+<body>
+
+    <h1 id="questionHeading">Hey Baby, I have something to ask of you</h1>
+
+    <!-- Replace with your pleading bear media (GIF or video) -->
+    <img class="pleading-bear" id="pleadingBear" src="https://i.pinimg.com/736x/04/6c/e1/046ce1391e5f6a9a9714002d5f9e0f46.jpg" alt="Pleading Bear Media">
+
+    <button type="button" id="goAheadButton" onclick="showValentineForm()">Go Ahead</button>
+
+    <form id="valentineForm">
+        <h2 id="valentineQuestion">Will you be my Valentine?</h2>
+        <button type="button" id="yesOption" onclick="submitForm('yes')">Yes</button>
+        <button type="button" id="noOption" onclick="submitForm('no')">No</button>
+
+        <!-- Replace with your happy bear media (GIF or video) -->
+        <img id="happyBearMedia" src="https://www.icegif.com/wp-content/uploads/milk-and-mocha-icegif.gif" alt="Happy Bear Media">
+    </form>
+
+    <script>
+        const pleadingBear = document.getElementById('pleadingBear');
+        const goAheadButton = document.getElementById('goAheadButton');
+        const valentineForm = document.getElementById('valentineForm');
+        const happyBearMedia = document.getElementById('happyBearMedia');
+        let sizeIncreaseInterval;
+
+        function showValentineForm() {
+            pleadingBear.style.opacity = '0'; /* Hide pleading bear */
+            goAheadButton.style.display = 'none'; /* Hide Go Ahead button */
+
+            setTimeout(() => {
+                pleadingBear.style.display = 'none'; /* Hide pleading bear */
+                valentineForm.style.display = 'flex'; /* Show the form */
+                valentineForm.style.opacity = '1'; /* Fade in effect */
+            }, 500); // Delay to ensure smooth transition
+
+            // Gradually increase the size of the Yes option with pink glitter
+            sizeIncreaseInterval = setInterval(() => {
+                const currentSize = parseFloat(getComputedStyle(yesOption).fontSize);
+                const newSize = currentSize * 1.1; // Increase size by 10% each second
+                yesOption.style.fontSize = `${newSize}px`;
+                yesOption.style.textShadow = `0 0 10px #ff69b4, 0 0 20px #ff69b4`; // Pink glitter effect
+            }, 1000);
+        }
+
+        function submitForm(answer) {
+            clearInterval(sizeIncreaseInterval); // Stop the size increase interval
+            if (answer === 'yes') {
+                questionHeading.innerText = "Yay! My baby said yes! I love you so much baby!";
+                happyBearMedia.style.display = 'block'; /* Show the happy bear image */
+            } else {
+                questionHeading.innerText = "Oh no! I'll miss you, baby!";
+            }
+        }
+    </script>
+
+</body>
+</html>
